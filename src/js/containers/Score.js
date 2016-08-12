@@ -28,7 +28,7 @@ class Score extends React.Component {
       );
     }
     return (
-      <div className="score">
+      <div ref="score" className="score">
         {parts}
       </div>
     );

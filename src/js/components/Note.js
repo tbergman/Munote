@@ -3,12 +3,12 @@ import noteHelper from '../helpers/noteHelper';
 
 export default class Note extends React.Component {
   render() {
-    const { duration, rest, type, voice } = this.props;
+    const { duration, rest, type, voice, pitch } = this.props;
 
     return (
-      <div className="note">
-        {noteHelper(type)}
-      </div>
+      <span className="note">
+      
+      </span>
     );
   }
 }
