@@ -13,22 +13,31 @@ export default class Measure extends React.Component {
           index={index}
           type={note.type}
           rest={note.rest}
+          pitch={note.pitch}
+          stem={note.stem}
+          accidental={note.accidental}
           voice={note.voice}
+          beam={note.beam}
           duration={note.duration}
           length={note.length}
         />
       );
     }
 
-    let cleff = '';
+    let clef = '';
     if (this.props.index === 0) {
-      cleff = attributes[0].clef[0].sign[0] === 'G' ?
-        'Treble Clef' : 'Bass Clef';
+      clef = attributes[0].clef[0].sign[0] === 'G' ?
+        'Treble' : 'Bass';
+    }
+
+    let barline = '';
+    if (this.props.measure.barline) {
+      barline = 'B'
     }
 
     return (
-      <span className="measure col-xs-2">
-        {cleff}|{notes}|
+      <span className="measure col-xs-3">
+        {clef}|{notes}|{barline}
       </span>
     );
   }

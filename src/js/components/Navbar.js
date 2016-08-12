@@ -5,7 +5,7 @@ export default class Navbar extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-default text-center" role="navigation">
-          Notron
+          Munote
         </nav>
       </div>
     );
