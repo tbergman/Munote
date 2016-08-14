@@ -52,8 +52,7 @@
     "redux-thunk": "^2.1.0",
     "source-map-support": "^0.4.2",
     "vexflow": "^1.2.71",
-    "webpack": "^1.13.1",
-    "xml2js": "^0.4.17"
+    "webpack": "^1.13.1"
   },
   "devDependencies": {
     "asar": "^0.12.1",
