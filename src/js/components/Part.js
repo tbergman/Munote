@@ -28,10 +28,10 @@ export default class Part extends React.Component {
         stave = new VF.Stave(barX, barY, barWidth);
         stave.addClef(part.clef).addTimeSignature(timeSignature);
       } else if (i >= 1) {
-        // Not First Bar and move over to fit more bars
+        // Not First Bar and Create new bar over at end of previous bar
         stave = new VF.Stave(barX += barWidth, barY, barWidth);
 
-        // Check to see if part is as long as Score measures.
+        // Check to see if part measures length is as long as Score measures.
         if(part.measures[i] !== undefined) {
           // Add new time signature if time signature != piece signature or last bar signature
           if (timeSignature !== part.measures[i].timeSignature || part.measures[i - 1].timeSignature !== part.measures[i].timeSignature) {
@@ -47,22 +47,26 @@ export default class Part extends React.Component {
         // If last put double barline
         stave.setEndBarType(VF.Barline.type.END);
       } else {
+        // Put normal bar line if not last measure
         stave.setEndBarType(VF.Barline.type.SINGLE);
       }
 
       // Connect it to the rendering context and draw!
       stave.setContext(context).draw();
+
       let beatsPerMeasure = parseInt(timeSignature.substring(0, 1));
-      console.log(beatsPerMeasure);
+
       let notes = [];
+      // If Measure does not exist make a measure with rests.
       if (part.measures[i] === undefined) {
-        for(let j = 0; j < 4; j++) {
+        for(let j = 0; j < beatsPerMeasure; j++) {
           notes.push(new VF.StaveNote({
             keys: ["b/4"],
             duration: "qr"
           }))
         }
       } else {
+        // Measure exists, create notes.
         for(let j = 0; j < part.measures[i].notes.length; j++) {
           notes.push(new VF.StaveNote({
             keys: part.measures[i].notes[j].keys,
