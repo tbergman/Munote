@@ -11,6 +11,7 @@
       "instrument": "trumpet",
       "key": "Bb",
       "clef": "treble",
+      "timeSignature": "4/4",
       "measures": [
         {
           "timeSignature": "4/4",
@@ -22,12 +23,39 @@
           ]
         },
         {
-          "timeSignature": "4/4",
+          "timeSignature": "5/4",
           "notes": [
             { "keys": ["c/4"], "duration": "q" },
             { "keys": ["d/4"], "duration": "q" },
             { "keys": ["e/4"], "duration": "q" },
-            { "keys": ["f/4"], "duration": "q" }
+            { "keys": ["f/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["f/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["d/4"], "duration": "q" },
+            { "keys": ["c/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["c/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["a/4"], "duration": "q" },
+            { "keys": ["g/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["a/4"], "duration": "q" },
+            { "keys": ["b/4"], "duration": "q" },
+            { "keys": ["d/4"], "duration": "h" }
           ]
         }
       ]

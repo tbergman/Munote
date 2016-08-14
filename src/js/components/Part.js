@@ -6,6 +6,8 @@ import Measure from './Measure';
 
 export default class Part extends React.Component {
   componentDidMount() {
+    const { part, font } = this.props;
+    console.log(part);
     // Staves
     const VF = Vex.Flow;
     const renderer = new VF.Renderer(
@@ -15,39 +17,65 @@ export default class Part extends React.Component {
     // Configure the rendering context.
     // renderer.resize(500, 200);
     const context = renderer.getContext();
-    context.setFont("Arial", 6, "").setBackgroundFillStyle("#eed");
-    // Create a stave of width 400 at position 10, 40 on the canvas.
-    const stave = new VF.Stave(20, 40, 400);
-    // Add a clef and time signature.
-    const clef = this.props.part.measure[0].attributes[0].clef[0].sign[0] == 'G' ? 'treble' : 'bass';
-    const beats = this.props.part.measure[0].attributes[0].time[0].beats[0];
-    const beatType = this.props.part.measure[0].attributes[0].time[0]['beat-type'][0];
-    stave.addClef(clef).addTimeSignature(`${beats}/${beatType}`);
-    // Connect it to the rendering context and draw!
-    stave.setContext(context).draw();
+    context.setFont(font.name, font.size, "").setBackgroundFillStyle("#eed");
 
     // Notes
-    const { part } = this.props;
-    let notes = [];
-    if (part.measure !== null && part.measure !== undefined) {
-      for(var i = 0; i < part.measure.length; i++) {
-        notes.push(new VF.StaveNote({ keys: ["c/4"], duration: "q" }))
+    let barWidth = 200;
+    let barX = 10;
+    let barY = 0;
+
+    for(let i = 0; i < part.measures.length; i++) {
+      // New Bar
+      let stave;
+      if (i === 0) {
+        stave = new VF.Stave(barX, barY, barWidth);
+        stave.addClef(part.clef).addTimeSignature(part.timeSignature);
+      } else if (i >= 1) {
+        stave = new VF.Stave(barX += 200, barY, barWidth);
+        if (part.timeSignature !== part.measures[i].timeSignature || part.measures[i - 1].timeSignature !== part.measures[i].timeSignature) {
+          stave.addTimeSignature(part.measures[i].timeSignature);
+        }
+        renderer.resize(barWidth + barX, 200);
+      }
+      console.log(stave.width);
+      console.log(stave.x);
+      console.log(stave.y);
+
+      stave.setEndBarType(VF.Barline.type.SINGLE);
+
+      // Connect it to the rendering context and draw!
+      stave.setContext(context).draw();
+
+      let notes = [];
+      for(let j = 0; j < part.measures[i].notes.length; j++) {
+        notes.push(new VF.StaveNote({
+          keys: part.measures[i].notes[j].keys,
+          duration: part.measures[i].notes[j].duration
+        }))
       }
 
+      console.log(notes);
       // Create a voice in Time signature and add above notes
-      var voice = new VF.Voice({num_beats: beats,  beat_value: beatType});
-      voice.addTickables(notes);
+      // let measureSig = part.measures[i].timeSignature;
+      // let num_beats = parseInt(measureSig.substring(0, 1));
+      // let beat_value = parseInt(measureSig.substring(measureSig.lenth - 1));
+      // let voice = new VF.Voice({num_beats: num_beats,  beat_value: beat_value});
+      // voice.setStrict(false);
+      // voice.addTickables(notes);
 
+      // Helper function to justify and draw a 4/4 voice
+      VF.Formatter.FormatAndDraw(context, stave, notes);
       // Format and justify the notes to 400 pixels.
-      var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
+      // let formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
 
       // Render voice
-      voice.draw(context, stave);
+      // voice.draw(context, stave);
     }
+
+
   }
 
   render() {
-
     return (
       <div ref="part" className="part">
 

@@ -20,17 +20,15 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Score extends React.Component {
-
-
   render() {
     const { file } = this.props;
-    console.log(file);
     let parts = <h2 className="text-center">Loading...</h2>;
     if (file !== null && file !== undefined) {
       parts = file.parts.map((part, index) =>
         <Part key={index} index={index} part={part} font={file.font}/>
       );
     }
+
     return (
       <div ref="score" className="score">
         <h2 className="text-center">{file.title}</h2>
