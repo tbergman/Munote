@@ -1,9 +1,6 @@
 import React from 'react';
 import Vex from 'vexflow';
 
-// Components
-import Measure from './Measure';
-
 export default class Part extends React.Component {
   componentDidMount() {
     const { part, font } = this.props;
