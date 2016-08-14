@@ -25,16 +25,23 @@ class Score extends React.Component {
     let parts = <h2 className="text-center">Loading...</h2>;
     if (file !== null && file !== undefined) {
       parts = file.parts.map((part, index) =>
-        <Part key={index} index={index} part={part} font={file.font}/>
+        <Part
+          key={index}
+          index={index}
+          part={part}
+          timeSignature={file.timeSignature}
+          font={file.font}
+          measures={file.measures}
+        />
       );
     }
 
     return (
       <div ref="score" className="score">
-        <h2 className="text-center">{file.title}</h2>
-        <div className="subtitle col-xs-6 text-center">Subtitle: {file.subtitle}</div>
-        <div className="composer col-xs-6 text-center">Composer: {file.composer}</div>
-        <br />
+        <h1 className="text-center">{file.title}</h1>
+        <h4 className="subtitle col-xs-6 text-center">Subtitle: {file.subtitle}</h4>
+        <h4 className="composer col-xs-6 text-center">Composer: {file.composer}</h4>
+        <br /><br /><br />
         {parts}
       </div>
     );

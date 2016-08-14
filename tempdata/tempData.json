@@ -2,6 +2,8 @@
   "title": "Fake Piece",
   "subtitle": "For Testing",
   "composer": "Michael Farrell",
+  "timeSignature": "4/4",
+  "measures": 5,
   "font": {
     "name": "Arial",
     "size": 10
@@ -11,7 +13,6 @@
       "instrument": "Trumpet 1",
       "key": "Bb",
       "clef": "treble",
-      "timeSignature": "4/4",
       "measures": [
         {
           "timeSignature": "4/4",
@@ -64,7 +65,6 @@
       "instrument": "Trumpet 2",
       "key": "Bb",
       "clef": "treble",
-      "timeSignature": "4/4",
       "measures": [
         {
           "timeSignature": "4/4",
@@ -111,6 +111,50 @@
             { "keys": ["a/4"], "duration": "8" },
             { "keys": ["b/4"], "duration": "8" },
             { "keys": ["d/4"], "duration": "h" }
+          ]
+        }
+      ]
+    },
+    {
+      "instrument": "Trumpet 3",
+      "key": "Bb",
+      "clef": "treble",
+      "measures": [
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["c/4"], "duration": "q" },
+            { "keys": ["d/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["f/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "5/4",
+          "notes": [
+            { "keys": ["c/4"], "duration": "q" },
+            { "keys": ["d/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["f/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["f/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["d/4"], "duration": "q" },
+            { "keys": ["c/4"], "duration": "q" }
+          ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["c/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["a/4"], "duration": "q" },
+            { "keys": ["g/4"], "duration": "q" }
           ]
         }
       ]
