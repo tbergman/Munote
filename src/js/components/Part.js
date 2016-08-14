@@ -55,7 +55,11 @@ export default class Part extends React.Component {
         }))
       }
       console.log(notes);
+      // create the beams
+      var beams = new VF.Beam.generateBeams(notes);
+
       VF.Formatter.FormatAndDraw(context, stave, notes);
+      beams.forEach(function(b) {b.setContext(context).draw()});
 
       // Create a voice in Time signature and add above notes
       // let measureSig = part.measures[i].timeSignature;
