@@ -75,22 +75,25 @@ export default class Part extends React.Component {
         }
       }
 
-      console.log(notes);
+      // console.log(notes);
       // create the beams
       var beams = new VF.Beam.generateBeams(notes, {
         beam_rests: true,
         show_stemlets: true
       });
+
       VF.Formatter.FormatAndDraw(context, stave, notes);
       beams.forEach(function(b) {b.setContext(context).draw()});
     }
   }
 
   render() {
+    let partClassName = `part-${this.props.index} ${this.props.part.instrument}`;
+
     return (
       <div>
         <span className="instrument">Instrument: {this.props.part.instrument}</span>
-        <div ref="part" className="part"></div>
+        <div ref="part" className={partClassName}></div>
       </div>
     );
   }

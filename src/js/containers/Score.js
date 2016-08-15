@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Vex from 'vexflow';
+import $ from "jquery";
 
 // Components
 import Part from '../components/Part';
@@ -36,6 +37,22 @@ class Score extends React.Component {
       );
     }
 
+    // Dom Node Map and Manipulation / Grab Notes and Organize
+    let partsArray = [];
+    let measureLength = [];
+    let grabbedNotes = [];
+    for(let i = 0; i < file.parts.length; i++) {
+      grabbedNotes.push($(`.part-${i}`).find(`.vf-stavenote`).toArray());
+    }
+    for(let i = 0; i < file.parts.length; i++) {
+      let currentMeasureLength = [];
+      for(let j = 0; j < file.parts[i].measures.length; j++) {
+        currentMeasureLength.push(file.parts[i].measures[j].notes.length);
+      }
+      measureLength.push(currentMeasureLength);
+    }
+    console.log(grabbedNotes);
+    console.log(measureLength);
     return (
       <div ref="score" className="score">
         <h1 className="text-center">{file.title}</h1>
