@@ -57,15 +57,16 @@ export default class Part extends React.Component {
       let beatsPerMeasure = parseInt(timeSignature.substring(0, 1));
 
       let notes = [];
+      // ToDo: Make sure adding measures adds new measures to every part.
       // If Measure does not exist make a measure with rests.
-      if (part.measures[i] === undefined) {
-        for(let j = 0; j < beatsPerMeasure; j++) {
-          notes.push(new VF.StaveNote({
-            keys: ["b/4"],
-            duration: "qr"
-          }))
-        }
-      } else {
+      // if (part.measures[i] === undefined) {
+      //   for(let j = 0; j < beatsPerMeasure; j++) {
+      //     notes.push(new VF.StaveNote({
+      //       keys: ["b/4"],
+      //       duration: "qr"
+      //     }))
+      //   }
+      // } else {
         // Measure exists, create notes.
         for(let j = 0; j < part.measures[i].notes.length; j++) {
           notes.push(new VF.StaveNote({
@@ -73,7 +74,7 @@ export default class Part extends React.Component {
             duration: part.measures[i].notes[j].duration
           }))
         }
-      }
+      // }
 
       // console.log(notes);
       // create the beams

@@ -38,12 +38,14 @@ class Score extends React.Component {
     }
 
     // Dom Node Map and Manipulation / Grab Notes and Organize
-    let partsArray = [];
-    let measureLength = [];
+    // Each Parts Note Nodes and Amount of Notes
     let grabbedNotes = [];
     for(let i = 0; i < file.parts.length; i++) {
       grabbedNotes.push($(`.part-${i}`).find(`.vf-stavenote`).toArray());
     }
+
+    // Each Parts Notes per Measure (Doesnt account for empty rest/data measures)
+    let measureLength = [];
     for(let i = 0; i < file.parts.length; i++) {
       let currentMeasureLength = [];
       for(let j = 0; j < file.parts[i].measures.length; j++) {
@@ -51,8 +53,24 @@ class Score extends React.Component {
       }
       measureLength.push(currentMeasureLength);
     }
+
+    // Loops through each part and puts each node in own array similar
+    // to how measures are laid out. Indexing is same as JSON.
+    let organizedNotesPerPart = [];
+    for(let i = 0; i < measureLength.length; i++) {
+      let tempPartHolder = [];
+      measureLength[i].forEach((x, index) => {
+        let tempMeasure = [];
+        for(let j = 0; j < x; j++) {
+          tempMeasure.push(grabbedNotes[i].shift());
+        }
+        tempPartHolder.push(tempMeasure);
+      });
+      organizedNotesPerPart.push(tempPartHolder);
+    }
     console.log(grabbedNotes);
     console.log(measureLength);
+    console.log(organizedNotesPerPart);
     return (
       <div ref="score" className="score">
         <h1 className="text-center">{file.title}</h1>

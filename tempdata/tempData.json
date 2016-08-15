@@ -156,6 +156,15 @@
             { "keys": ["a/4"], "duration": "q" },
             { "keys": ["g/4"], "duration": "q" }
           ]
+        },
+        {
+          "timeSignature": "4/4",
+          "notes": [
+            { "keys": ["c/4"], "duration": "q" },
+            { "keys": ["e/4"], "duration": "q" },
+            { "keys": ["a/4"], "duration": "q" },
+            { "keys": ["g/4"], "duration": "q" }
+          ]
         }
       ]
     }
