@@ -84,12 +84,13 @@ class Score extends React.Component {
 
     // Note Selection / Find Index\
     // Found Index will be used for Action to manipulate JSON
-    $(".vf-stavenote").mousedown(function(x) {
-      console.log(x);
+    d3.selectAll(".vf-stavenote").on("click", function() {
+      let selection = this;
+      console.log(selection);
       for(let i = 0; i < organizedNotesPerPart.length; i++) {
         for(let j = 0; j < organizedNotesPerPart[i].length; j++) {
           for(let k = 0; k < organizedNotesPerPart[i][j].length; k++) {
-            if (organizedNotesPerPart[i][j][k] === x.currentTarget) {
+            if (organizedNotesPerPart[i][j][k] === selection) {
               console.log(`Part: ${i}, Measure: ${j}, Note: ${k}`);
               const notePitch = file.parts[i].measures[j].notes[k].keys;
               const noteType = file.parts[i].measures[j].notes[k].duration;
