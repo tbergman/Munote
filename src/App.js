@@ -2,6 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// jQuery and d3
+import $ from 'jquery';
+import 'jquery-ui';
+import d3 from 'd3';
+
 // Import CSS/SCSS
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/application.scss';
@@ -24,5 +29,5 @@ ReactDOM.render(
       {routes}
     </Router>
   </Provider>
-  , document.getElementById('app')
+  ,document.getElementById('app')
 );

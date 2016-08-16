@@ -4,7 +4,6 @@ import Vex from 'vexflow';
 export default class Part extends React.Component {
   componentDidMount() {
     const { part, font, timeSignature, measures } = this.props;
-    console.log(part);
     // Staves
     const VF = Vex.Flow;
     const renderer = new VF.Renderer(
@@ -90,7 +89,7 @@ export default class Part extends React.Component {
 
   render() {
     let partClassName = `part-${this.props.index} ${this.props.part.instrument}`;
-    
+
     return (
       <div>
         <span className="instrument">Instrument: {this.props.part.instrument}</span>

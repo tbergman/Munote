@@ -21,12 +21,22 @@ const config = merge(baseConfig, {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css', 'sass')
       },
+      {
+        test: /vendor\/.+\.(jsx|js)$/,
+        loader: 'imports?jQuery=jquery,$=jquery,this=>window'
+      }
     ]
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
+      "d3": "d3"
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {

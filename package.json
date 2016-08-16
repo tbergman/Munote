@@ -35,11 +35,13 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "css-modules-require-hook": "^4.0.1",
+    "d3": "^4.2.2",
     "electron-debug": "^1.0.1",
     "es6-promise": "^3.2.1",
     "express": "^4.14.0",
     "immutable": "^3.8.1",
     "jquery": "^3.1.0",
+    "jquery-ui": "jquery/jquery-ui",
     "node-sass": "^3.8.0",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.3.0",

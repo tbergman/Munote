@@ -36,14 +36,22 @@ module.exports = merge(baseConfig, {
       { test: /\.otf$/, loader: "file" },
       { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
       { test: /\.ttf$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
-      { test: /\.svg$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
+      { test: /\.svg$/, loader: "url?limit=10000&mimetype=image/svg+xml" },
+      {
+        test: /vendor\/.+\.(jsx|js)$/,
+        loader: 'imports?jQuery=jquery,$=jquery,this=>window'
+      }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.ProvidePlugin({
-      'Promise': 'exports?global.Promise!es6-promise'
+      'Promise': 'exports?global.Promise!es6-promise',
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
+      "d3": "d3"
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
