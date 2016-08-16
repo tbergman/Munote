@@ -90,7 +90,7 @@ export default class Part extends React.Component {
 
   render() {
     let partClassName = `part-${this.props.index} ${this.props.part.instrument}`;
-
+    
     return (
       <div>
         <span className="instrument">Instrument: {this.props.part.instrument}</span>

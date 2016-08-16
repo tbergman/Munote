@@ -43,7 +43,6 @@ class Score extends React.Component {
     for(let i = 0; i < file.parts.length; i++) {
       grabbedNotes.push($(`.part-${i}`).find(`.vf-stavenote`).toArray());
     }
-
     // Each Parts Notes per Measure (Doesnt account for empty rest/data measures)
     let measureLength = [];
     for(let i = 0; i < file.parts.length; i++) {
@@ -53,7 +52,6 @@ class Score extends React.Component {
       }
       measureLength.push(currentMeasureLength);
     }
-
     // Loops through each part and puts each node in own array similar
     // to how measures are laid out. Indexing is same as JSON.
     let organizedNotesPerPart = [];
@@ -68,9 +66,23 @@ class Score extends React.Component {
       });
       organizedNotesPerPart.push(tempPartHolder);
     }
-    console.log(grabbedNotes);
-    console.log(measureLength);
+    // organizedNotesPerPart is laid out like JSON/File state
     console.log(organizedNotesPerPart);
+
+    // Note Selection / Find Index\
+    // Found Index will be used for Action to manipulate JSON
+    $(".vf-stavenote").click(function(x) {
+      for(let i = 0; i < organizedNotesPerPart.length; i++) {
+        for(let j = 0; j < organizedNotesPerPart[i].length; j++) {
+          for(let k = 0; k < organizedNotesPerPart[i][j].length; k++) {
+            if (organizedNotesPerPart[i][j][k] === x.currentTarget) {
+              console.log(`Part: ${i}, Measure: ${j}, Note: ${k}`);
+            };
+          }
+        }
+      }
+    });
+
     return (
       <div ref="score" className="score">
         <h1 className="text-center">{file.title}</h1>
