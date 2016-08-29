@@ -40,8 +40,8 @@ class Score extends React.Component {
     // Each Parts Note Nodes and Amount of Notes
     let grabbedNotes = [];
     for(let i = 0; i < file.parts.length; i++) {
-      let selection = d3.selectAll(`.part-${i}`).selectAll(`.vf-stavenote`);
-      grabbedNotes.push(selection['_groups'][0]);
+      let selection = $(`.part-${i}`).find(`.vf-stavenote`).toArray();
+      grabbedNotes.push(selection);
     }
 
     //Each Parts Notes per Measure (Doesnt account for empty rest/data measures)
@@ -54,40 +54,31 @@ class Score extends React.Component {
       measureLength.push(currentMeasureLength);
     }
 
-    // Convert NodeList to Array and Organize Notes Like JSON Data Index
-    let grabbedNoteArray = [];
+    // Loops through each part and puts each node in own array similar
+    // to how measures are laid out. Indexing is same as JSON.
     let organizedNotesPerPart = [];
-    if (grabbedNotes[0] !== undefined) {
-      for(let i = 0; i < grabbedNotes.length; i++) {
-        let tempArray = [];
-        for(let j = 0; j < grabbedNotes[i].length; j++) {
-          tempArray[j] = grabbedNotes[i][j];
+
+    for(let i = 0; i < measureLength.length; i++) {
+      let tempPartHolder = [];
+      measureLength[i].forEach((x, index) => {
+        let tempMeasure = [];
+        for(let j = 0; j < x; j++) {
+          tempMeasure.push(grabbedNotes[i].shift());
         }
-        grabbedNoteArray.push(tempArray);
-      }
-      // Loops through each part and puts each node in own array similar
-      // to how measures are laid out. Indexing is same as JSON.
-      for(let i = 0; i < measureLength.length; i++) {
-        let tempPartHolder = [];
-        measureLength[i].forEach((x, index) => {
-          let tempMeasure = [];
-          for(let j = 0; j < x; j++) {
-            tempMeasure.push(grabbedNoteArray[i].shift());
-          }
-          tempPartHolder.push(tempMeasure);
-        });
-        organizedNotesPerPart.push(tempPartHolder);
-      }
+        tempPartHolder.push(tempMeasure);
+      });
+      organizedNotesPerPart.push(tempPartHolder);
     }
     // organizedNotesPerPart is laid out like JSON/File state
     console.log(organizedNotesPerPart);
 
     // Note Selection / Find Index\
     // Found Index will be used for Action to manipulate JSON
-    d3.selectAll(".vf-stavenote").on("mousedown", function() {
+    $(".vf-stavenote").on("mousedown", function() {
       let selection = this;
       // d3.select(this).on(".drag", null);
-      console.log(selection);
+      let nodeSelection = $(this);
+      console.log(nodeSelection);
       for(let i = 0; i < organizedNotesPerPart.length; i++) {
         for(let j = 0; j < organizedNotesPerPart[i].length; j++) {
           for(let k = 0; k < organizedNotesPerPart[i][j].length; k++) {
